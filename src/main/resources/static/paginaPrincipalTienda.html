@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Productos Carnicería</title>
+</head>
+<body>
+<h1>Productos Disponibles</h1>
+
+<!-- Sección de Carnes -->
+<section>
+    <h2>Tipos de Carne</h2>
+    <ul>
+        <li><a href="#" onclick="guardarCarne('RES')">Res</a></li>
+        <li><a href="#" onclick="guardarCarne('POLLO')">Pollo</a></li>
+        <li><a href="#" onclick="guardarCarne('CERDO')">Cerdo</a></li>
+        <li><a href="#" onclick="guardarCarne('CORDERO')">Cordero</a></li>
+        <li><a href="#" onclick="guardarCarne('PAVO')">Pavo</a></li>
+    </ul>
+</section>
+
+<!-- Sección de Quesos -->
+<section>
+    <h2>Quesos</h2>
+    <ul>
+        <li><a href="queso-cheddar.html">Queso Cheddar</a></li>
+        <li><a href="queso-mozzarella.html">Queso Mozzarella</a></li>
+        <li><a href="queso-parmesano.html">Queso Parmesano</a></li>
+        <li><a href="queso-azul.html">Queso Azul</a></li>
+    </ul>
+</section>
+
+<!-- Sección de Especias -->
+<section>
+    <h2>Especias</h2>
+    <ul>
+        <li><a href="pimienta-negra.html">Pimienta Negra</a></li>
+        <li><a href="comino.html">Comino</a></li>
+        <li><a href="oregano.html">Orégano</a></li>
+        <li><a href="pimenton.html">Pimentón</a></li>
+        <li><a href="canela.html">Canela</a></li>
+    </ul>
+</section>
+
+<script>
+    function guardarCarne(tipoCarne) {
+        // Guardar en localStorage
+        localStorage.setItem('carneElegida', tipoCarne);
+
+        // Opcional: Redirigir a CarneElegida.html
+        window.location.href = 'CarneElegida.html';
+    }
+</script>
+</body>
+</html>
