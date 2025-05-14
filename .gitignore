@@ -26,10 +26,6 @@ logs/
 *.ear
 *.jar
 
-# Archivos de configuración local
-application.properties
-application.yml
-
 # Sistema operativo
 .DS_Store
 Thumbs.db
