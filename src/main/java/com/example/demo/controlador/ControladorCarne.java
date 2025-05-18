@@ -69,4 +69,20 @@ public class ControladorCarne {
                     .body("Error al obtener carnes: " + e.getMessage());
         }
     }
+
+    @GetMapping("/obtenerPorId/{id}")
+    @ResponseBody
+    public ResponseEntity<?> obtenerCarnePorId(@PathVariable Long id) {
+        try {
+            EntidadCarne carne = servicioCarnes.obtenerCarnePorId(id);
+            return ResponseEntity.ok(carne);
+        } catch (RuntimeException e) {
+            if (e.getMessage().contains("No se encontró")) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+            }
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Error al obtener carne: " + e.getMessage());
+        }
+    }
 }

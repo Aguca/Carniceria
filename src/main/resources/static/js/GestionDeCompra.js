@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
         return;
     }
 
-    // 2. Mostrar el tipo seleccionado
+    // Mostrar el tipo seleccionado
     const titulo = document.getElementById('titulo-carne');
     if (!titulo) {
         console.error("4. No se encontró el elemento #titulo-carne");
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
     titulo.textContent = `Carnes de tipo: ${tipoCarne}`;
     console.log("5. Título actualizado");
 
-    // 3. Hacer fetch al endpoint
+    // Hacer fetch al endpoint
     console.log("6. Haciendo fetch...");
     fetch(`/carne/obtenerPorTipo/${tipoCarne}`)
         .then(response => {
@@ -71,8 +71,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 <td>${carne.descripcion || 'Sin descripción'}</td>
                 <td>${carne.eurosPorKilo} €/kg</td>
                 <td>
-                    <button class="btn-editar" data-id="${carne.id}">Editar</button>
-                    <button class="btn-eliminar" data-id="${carne.id}">Eliminar</button>
+                    <button class="btn-editar" 
+                            data-id="${carne.id}"
+                            data-carne='${JSON.stringify(carne)}'>
+                        Ver detalles
+                    </button>
                 </td>
             `;
             tablaCarnes.appendChild(fila);
@@ -81,45 +84,44 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log("15. Añadiendo event listeners...");
         document.querySelectorAll('.btn-editar').forEach(btn => {
             btn.addEventListener('click', () => {
-                console.log("Click en editar, ID:", btn.dataset.id);
-                editarCarne(btn.dataset.id);
+                console.log("Click en ver detalles, ID:", btn.dataset.id);
+                const carneData = JSON.parse(btn.dataset.carne);
+                detallesCarne(btn.dataset.id, carneData);
             });
         });
+    }
 
-        document.querySelectorAll('.btn-eliminar').forEach(btn => {
-            btn.addEventListener('click', () => {
-                console.log("Click en eliminar, ID:", btn.dataset.id);
-                eliminarCarne(btn.dataset.id);
+    function detallesCarne(id, carneSeleccionada) {
+        console.log("16. Guardando ID para detalles:", id);
+        localStorage.setItem('id_detalles_carne', id);
+        
+        if (carneSeleccionada) {
+            // Guardar en la sesión del servidor
+            fetch('/carne/guardarCarne', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(carneSeleccionada)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al guardar en sesión');
+                }
+                return response.text();
+            })
+            .then(result => {
+                console.log('Carne guardada en sesión:', result);
+                window.location.href = 'vistaDetallecarne.html';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Aun así redirigir aunque falle el guardado en sesión
+                window.location.href = 'vistaDetallecarne.html';
             });
-        });
+        } else {
+            console.error('No se encontró la carne con ID:', id);
+            window.location.href = 'vistaDetallecarne.html';
+        }
     }
 });
-
-function editarCarne(id) {
-    console.log("Iniciando edición para ID:", id);
-    localStorage.setItem('carneAEditar', id);
-    window.location.href = 'editar-carne.html';
-}
-
-function eliminarCarne(id) {
-    console.log("Intentando eliminar ID:", id);
-    if (!confirm(`¿Eliminar carne con ID ${id}?`)) {
-        console.log("Eliminación cancelada");
-        return;
-    }
-
-    console.log("Enviando solicitud DELETE...");
-    fetch(`/carne/eliminar/${id}`, {
-        method: 'DELETE'
-    })
-        .then(response => {
-            console.log("Respuesta DELETE recibida, status:", response.status);
-            if (!response.ok) throw new Error('Error en la respuesta');
-            alert('Carne eliminada');
-            location.reload();
-        })
-        .catch(error => {
-            console.error("Error en DELETE:", error);
-            alert('Error al eliminar');
-        });
-}
