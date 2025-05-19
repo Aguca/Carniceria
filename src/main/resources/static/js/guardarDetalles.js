@@ -13,86 +13,70 @@ document.addEventListener('DOMContentLoaded', function() {
     let carneActual = null;
     let precioPorKg = 0;
 
-    // Función para cargar la información de la carne desde localStorage y backend
+    // Función para cargar la información de la carne
     async function cargarCarne() {
         try {
-            // Obtener el ID de localStorage
             const idCarne = localStorage.getItem('id_detalles_carne');
+            if (!idCarne) throw new Error('No se encontró ID de carne');
             
-            if (!idCarne) {
-                throw new Error('No se encontró ID de carne en localStorage');
-            }
-            
-            // Obtener los detalles de la carne desde el backend
             const response = await fetch(`/carne/obtenerPorId/${idCarne}`);
-            
-            if (!response.ok) {
-                throw new Error('No se pudo obtener la información de la carne');
-            }
+            if (!response.ok) throw new Error('Error al obtener la carne');
             
             carneActual = await response.json();
             mostrarInformacionCarne(carneActual);
-            
-            // Guardar también en localStorage por si acaso
             localStorage.setItem('carne_actual', JSON.stringify(carneActual));
-            
         } catch (error) {
-            console.error('Error al cargar la carne:', error);
-            
-            // Intentar recuperar de localStorage como fallback
+            console.error('Error:', error);
             const carneLocal = JSON.parse(localStorage.getItem('carne_actual'));
-            if (carneLocal) {
-                carneActual = carneLocal;
-                mostrarInformacionCarne(carneActual);
-            } else {
-                mostrarInformacionPorDefecto();
-            }
+            carneLocal ? mostrarInformacionCarne(carneLocal) : mostrarInformacionPorDefecto();
         }
     }
 
-    // Función para mostrar la información de la carne
+    // Mostrar información de la carne
     function mostrarInformacionCarne(carne) {
         nombreCarneElement.textContent = carne.nombre;
-        tipoCarneElement.textContent = `Tipo de carne: ${carne.tipoCarne}`;
+        tipoCarneElement.textContent = `Tipo: ${carne.tipoCarne}`;
         corteCarneElement.textContent = `Corte: ${carne.tipoCorte}`;
-        precioKiloElement.textContent = `Precio por kilo: €${(carne.eurosPorKilo / 100).toFixed(2)}`;
+        precioKiloElement.textContent = `Precio/kg: €${(carne.eurosPorKilo / 100).toFixed(2)}`;
         descripcionElement.textContent = carne.descripcion || 'Sin descripción';
-        precioPorKg = carne.eurosPorKilo / 100; // Convertir a euros
+        precioPorKg = carne.eurosPorKilo / 100; // Convertir céntimos a euros
     }
 
-    // Función para mostrar información por defecto si hay error
+    // Información por defecto
     function mostrarInformacionPorDefecto() {
         nombreCarneElement.textContent = 'Carne de Res';
-        tipoCarneElement.textContent = 'Tipo de carne: Vacuno';
+        tipoCarneElement.textContent = 'Tipo: Vacuno';
         corteCarneElement.textContent = 'Corte: Lomo';
-        precioKiloElement.textContent = 'Precio por kilo: €12.99';
-        descripcionElement.textContent = 'Carne de res premium';
+        precioKiloElement.textContent = 'Precio/kg: €12.99';
+        descripcionElement.textContent = 'Carne premium seleccionada';
         precioPorKg = 12.99;
     }
 
-    // Función para calcular y mostrar el precio total
+    // Función para calcular el precio (corregido para comas decimales)
     function calcularPrecio() {
-        const cantidad = parseFloat(cantidadInput.value);
+        const valor = cantidadInput.value.replace(',', '.'); // Convertir comas a puntos
+        const cantidad = parseFloat(valor) || 0; // Si no es número, usa 0
         
         if (cantidad > 0) {
-            const precioTotal = cantidad * precioPorKg;
+            const precioTotal = (cantidad * precioPorKg) * 100;
             precioTotalSpan.textContent = `€${precioTotal.toFixed(2)}`;
         } else {
             precioTotalSpan.textContent = "€0.00";
         }
     }
 
-    // Función para añadir al carrito
+    // Añadir al carrito (versión corregida)
     function anadirAlCarrito() {
-        const cantidad = parseFloat(cantidadInput.value);
-        
+        const valor = cantidadInput.value.replace(',', '.');
+        const cantidad = parseFloat(valor);
+
         if (isNaN(cantidad) || cantidad <= 0) {
-            alert('Por favor ingrese una cantidad válida');
+            alert('Ingrese una cantidad válida (ej: 1,5 o 1.5)');
             return;
         }
 
         if (!carneActual) {
-            alert('No hay información de carne disponible');
+            alert('Error: No hay información del producto');
             return;
         }
 
@@ -103,26 +87,22 @@ document.addEventListener('DOMContentLoaded', function() {
             tipoCorte: carneActual.tipoCorte,
             cantidad: cantidad,
             precioPorKg: precioPorKg,
-            precioTotal: cantidad * precioPorKg,
+            precioTotal: parseFloat(((cantidad * precioPorKg)*100).toFixed(2)), // Redondeo seguro
             descripcion: carneActual.descripcion || ''
         };
 
-        // Obtener carrito existente o crear uno nuevo
         let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-        
-        // Añadir nuevo item al carrito
         carrito.push(itemCarrito);
-        
-        // Guardar en localStorage
         localStorage.setItem('carrito', JSON.stringify(carrito));
         
-        alert('Producto añadido al carrito correctamente');
+        alert(`${cantidad} kg de ${carneActual.nombre} añadidos al carrito`);
+        window.location.href = '/paginaPrincipalTienda.html';
     }
 
-    // Event listeners
+    // Event Listeners
     cantidadInput.addEventListener('input', calcularPrecio);
     anadirCarritoBtn.addEventListener('click', anadirAlCarrito);
 
-    // Cargar la información al iniciar
+    // Inicialización
     cargarCarne();
 });

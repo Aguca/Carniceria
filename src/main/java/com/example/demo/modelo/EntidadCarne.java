@@ -34,5 +34,5 @@ public class EntidadCarne implements Serializable {
     private String descripcion;
 
     @Column(length = 50, nullable = false)
-    private long EurosPorKilo;
+    private Long EurosPorKilo;
 }

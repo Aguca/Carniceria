@@ -1,13 +1,13 @@
 package com.example.demo.servicio.Imp;
 
 import com.example.demo.modelo.EntidadPedido;
-import com.example.demo.modelo.EntidadUsuario;
+import com.example.demo.modelo.EntidadDetallePedido;
 import com.example.demo.repositorio.RepositorioPedidos;
-import com.example.demo.repositorio.RepositorioServicioUsuario;
+import com.example.demo.repositorio.RepositorioDetallesPedido;
 import com.example.demo.servicio.ServicioPedidos;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,12 +15,34 @@ import java.util.Optional;
 public class ServicioPedidosImp implements ServicioPedidos {
 
     private final RepositorioPedidos repositorioPedidos;
-    private final RepositorioServicioUsuario repositorioUsuarios;
+    private final RepositorioDetallesPedido repositorioDetallePedidos;
 
-    public ServicioPedidosImp(RepositorioPedidos repositorioPedidos,
-                              RepositorioServicioUsuario repositorioUsuarios) {
+    public ServicioPedidosImp(RepositorioPedidos repositorioPedidos, 
+                            RepositorioDetallesPedido repositorioDetallePedidos) {
         this.repositorioPedidos = repositorioPedidos;
-        this.repositorioUsuarios = repositorioUsuarios;
+        this.repositorioDetallePedidos = repositorioDetallePedidos;
+    }
+
+    @Override
+    @Transactional
+    public EntidadPedido guardarPedido(EntidadPedido pedido) {
+        // Guardar el pedido principal
+        EntidadPedido pedidoGuardado = repositorioPedidos.save(pedido);
+        
+        // Guardar los detalles si existen
+        if (pedido.getDetalles() != null && !pedido.getDetalles().isEmpty()) {
+            for (EntidadDetallePedido detalle : pedido.getDetalles()) {
+                detalle.setPedido(pedidoGuardado);
+                repositorioDetallePedidos.save(detalle);
+            }
+        }
+        
+        return pedidoGuardado;
+    }
+
+    @Override
+    public Optional<EntidadPedido> obtenerPedidoPorId(Long id) {
+        return repositorioPedidos.findById(id);
     }
 
     @Override
@@ -29,67 +51,43 @@ public class ServicioPedidosImp implements ServicioPedidos {
     }
 
     @Override
-    public EntidadPedido obtenerPedidoPorId(long id) {
-        return repositorioPedidos.findById(id)
-                .orElseThrow(() -> new RuntimeException("No se encontró el pedido con ID: " + id));
-    }
-
-    @Override
-    public List<EntidadPedido> obtenerPedidosPorUsuario(long usuarioId) {
-        EntidadUsuario usuario = repositorioUsuarios.findById(usuarioId)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + usuarioId));
-        return repositorioPedidos.findByUsuario(usuario);
-    }
-
-    @Override
-    public List<EntidadPedido> obtenerPedidosPorEstado(boolean entregado, boolean pagado) {
-        return repositorioPedidos.findByEntregadoAndPagado(entregado, pagado);
-    }
-
-    @Override
-    public EntidadPedido guardarPedido(EntidadPedido pedido) {
-        if (pedido.getId() != null && repositorioPedidos.existsById(pedido.getId())) {
-            EntidadPedido pedidoExistente = repositorioPedidos.findById(pedido.getId())
-                    .orElseThrow(() -> new RuntimeException("No se encontró el pedido con ID: " + pedido.getId()));
-
-            // Actualizar campos del pedido
-            pedidoExistente.setFechaEntrega(pedido.getFechaEntrega());
-            pedidoExistente.setEntregado(pedido.isEntregado());
-            pedidoExistente.setPagado(pedido.isPagado());
-
-            return repositorioPedidos.save(pedidoExistente);
-        } else {
-            // Establecer fecha de pedido automáticamente
-            if(pedido.getFechaPedido() == null) {
-                pedido.setFechaPedido(LocalDate.now());
-            }
-            return repositorioPedidos.save(pedido);
-        }
-    }
-
-    @Override
+    @Transactional
     public void eliminarPedido(Long id) {
-        if (!repositorioPedidos.existsById(id)) {
-            throw new RuntimeException("No se encontró el pedido con ID: " + id);
-        }
+        // Esto eliminará en cascada los detalles si está configurado en la entidad
         repositorioPedidos.deleteById(id);
     }
 
     @Override
-    public List<EntidadPedido> obtenerPedidosPorFechaEntrega(String fechaInicio, String fechaFin) {
-        LocalDate inicio = LocalDate.parse(fechaInicio);
-        LocalDate fin = LocalDate.parse(fechaFin);
-        return repositorioPedidos.findByFechaEntregaBetween(inicio, fin);
+    @Transactional
+    public EntidadPedido actualizarPedido(EntidadPedido pedido) {
+        if (pedido.getId() == null || !repositorioPedidos.existsById(pedido.getId())) {
+            throw new IllegalArgumentException("No se puede actualizar un pedido que no existe");
+        }
+        
+        // Actualizar el pedido principal
+        EntidadPedido pedidoActualizado = repositorioPedidos.save(pedido);
+        
+        // Aquí podrías añadir lógica para actualizar los detalles si es necesario
+        
+        return pedidoActualizado;
+    }
+
+    // Implementación de los nuevos métodos para detalles
+    @Override
+    public EntidadDetallePedido guardarDetallePedido(EntidadDetallePedido detalle) {
+        return repositorioDetallePedidos.save(detalle);
     }
 
     @Override
-    public EntidadPedido actualizarEstadoPedido(Long id, boolean entregado, boolean pagado) {
-        EntidadPedido pedido = repositorioPedidos.findById(id)
-                .orElseThrow(() -> new RuntimeException("No se encontró el pedido con ID: " + id));
-
-        pedido.setEntregado(entregado);
-        pedido.setPagado(pagado);
-
-        return repositorioPedidos.save(pedido);
+    public List<EntidadDetallePedido> obtenerDetallesPorPedidoId(Long pedidoId) {
+        return repositorioDetallePedidos.findByPedidoId(pedidoId);
     }
+
+    @Override
+    @Transactional
+    public void eliminarDetallePedido(Long id) {
+        repositorioDetallePedidos.deleteById(id);
+    }
+
+    
 }

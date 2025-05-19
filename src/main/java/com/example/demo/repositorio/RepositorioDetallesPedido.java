@@ -25,4 +25,6 @@ public interface RepositorioDetallesPedido extends JpaRepository<EntidadDetalleP
 
     // Buscar detalles con precio por kilo mayor a X
     List<EntidadDetallePedido> findByPrecioPorKiloGreaterThan(double precio);
+
+    List<EntidadDetallePedido> findByPedidoId(Long pedidoId);
 }

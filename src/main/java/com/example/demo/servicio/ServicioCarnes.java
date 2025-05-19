@@ -12,4 +12,5 @@ public interface ServicioCarnes {
     EntidadCarne guardarCarne (EntidadCarne carne);
     void eliminarCarne (Long id);
     List<EntidadCarne> obtenerCarnePorTipo(String tipoCarne);
+    
 }

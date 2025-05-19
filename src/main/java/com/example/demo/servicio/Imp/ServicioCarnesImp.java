@@ -12,6 +12,7 @@ import java.util.List;
 public class ServicioCarnesImp implements ServicioCarnes {
 
     private final RepositorioServicioCarnes repositorioServicioCarnes;
+    
 
     public ServicioCarnesImp(RepositorioServicioCarnes repositorioServicioCarnes) {
         this.repositorioServicioCarnes = repositorioServicioCarnes;

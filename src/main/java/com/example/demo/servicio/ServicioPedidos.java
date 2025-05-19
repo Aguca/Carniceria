@@ -1,15 +1,19 @@
 package com.example.demo.servicio;
 
 import com.example.demo.modelo.EntidadPedido;
+import com.example.demo.modelo.EntidadDetallePedido;
 import java.util.List;
+import java.util.Optional;
 
 public interface ServicioPedidos {
-    List<EntidadPedido> obtenerTodosLosPedidos();
-    EntidadPedido obtenerPedidoPorId(long id);
-    List<EntidadPedido> obtenerPedidosPorUsuario(long usuarioId);
-    List<EntidadPedido> obtenerPedidosPorEstado(boolean entregado, boolean pagado);
     EntidadPedido guardarPedido(EntidadPedido pedido);
+    Optional<EntidadPedido> obtenerPedidoPorId(Long id);
+    List<EntidadPedido> obtenerTodosLosPedidos();
     void eliminarPedido(Long id);
-    List<EntidadPedido> obtenerPedidosPorFechaEntrega(String fechaInicio, String fechaFin);
-    EntidadPedido actualizarEstadoPedido(Long id, boolean entregado, boolean pagado);
+    EntidadPedido actualizarPedido(EntidadPedido pedido);
+    
+    // Nuevos métodos para detalles
+    EntidadDetallePedido guardarDetallePedido(EntidadDetallePedido detalle);
+    List<EntidadDetallePedido> obtenerDetallesPorPedidoId(Long pedidoId);
+    void eliminarDetallePedido(Long id);
 }

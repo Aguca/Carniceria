@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Carrito de Carnes</title>
+</head>
+<body>
+    <h1>Mi Carrito</h1>
+    
+    <table id="tabla-carrito">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Tipo</th>
+                <th>Corte</th>
+                <th>Cantidad (kg)</th>
+                <th>Precio/kg</th>
+                <th>Subtotal</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="cuerpo-tabla">
+            <!-- Los productos se insertarán aquí mediante JavaScript -->
+        </tbody>
+    </table>
+    
+    <div class="total" id="total-carrito">
+        Total: €0.00
+    </div>
+    
+    <button class="vaciar-carrito" id="vaciar-carrito">
+        Vaciar Carrito
+    </button>
+    <button class="efectivo" id="efectivo">
+        Pago en efectivo
+    </button>
+    
+    <button class="tarjeta" id="tarjeta">
+        Pago con tarjeta
+    </button>
+
+    <script src="./js/carrito.js"></script>
+</body>
+</html>

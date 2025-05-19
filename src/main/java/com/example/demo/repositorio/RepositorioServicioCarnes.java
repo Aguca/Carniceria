@@ -12,5 +12,6 @@ public interface RepositorioServicioCarnes extends JpaRepository<EntidadCarne, L
     List<EntidadCarne> findByTipoCarne(String tipoCarne);
     EntidadCarne findByTipoCorte (String tipoCorte);
     EntidadCarne findByNombre (String nombre);
+    long countByIdIn(List<Long> ids);
 
 }
