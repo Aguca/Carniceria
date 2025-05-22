@@ -2,32 +2,49 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="./css/gestorProductos.css">
     <title>Gestión de Carnes</title>
 </head>
 <body>
-<h1>Panel de Gestión de Carnes</h1>
-<button id="logoutBtn" onclick="cerrarSesion()">Cerrar Sesión</button>
-<button id="botonCrearProducto" onclick="window.location.href = `CrearCarne.html`">Añadir un Producto</button>
-<a href="administrador.html">Volver al panel de administración</a>
-<h2>Listado de Carnes</h2>
-<table id="tablaCarnes">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Tipo de Carne</th>
-        <th>Tipo de Corte</th>
-        <th>Precio por Kg (€)</th>
-        <th>Descripción</th>
-        <th>Acciones</th>
-    </tr>
-    </thead>
-    <tbody>
-    <!-- La lista de carnes será cargada dinámicamente aquí -->
-    </tbody>
-</table>
+    <header class="full-width-header">
+        <h1>Panel de Gestión de Carnes</h1>
+        <div class="button-grid">
+            <button id="logoutBtn" onclick="cerrarSesion()">Cerrar Sesión</button>
+            <button id="botonCrearProducto" onclick="window.location.href = 'CrearCarne.html'">Añadir Producto</button>
+            <a href="administrador.html" class="boton-volver">Volver al panel</a>
+        </div>
+    </header>
 
-<script src="./js/gestionCarnes.js"></script>
-<script src="./js/CerrarSesion.js"></script>
+    <main class="main-content">
+        <h2>Listado de Carnes</h2>
+        
+        <div class="table-wrapper">
+            <table id="tablaCarnes">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Tipo de Carne</th>
+                        <th>Tipo de Corte</th>
+                        <th>Precio (€/kg)</th>
+                        <th>Descripción</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- La lista de carnes será cargada dinámicamente aquí -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer class="full-width-footer">
+        <div class="footer-contenido">
+            <!-- Contenido del footer -->
+        </div>
+    </footer>
+
+    <script src="./js/gestionCarnes.js"></script>
+    <script src="./js/CerrarSesion.js"></script>
 </body>
 </html>

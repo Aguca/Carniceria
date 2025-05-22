@@ -3,53 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <title>Añadir Nueva Carne</title>
+    <link rel="stylesheet" href="./css/añadirCarne.css">
 </head>
 <body>
-<h1>Añadir Nueva Carne</h1>
+    <h1>Añadir Nueva Carne</h1>
+    
+    <div class="form-container">
+        <form id="formAñadirCarne">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" required>
+            </div>
 
-<form id="formAñadirCarne">
-    <div>
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" required>
+            <div class="form-group">
+                <label for="tipoCarne">Tipo de Carne:</label>
+                <select id="tipoCarne" required>
+                    <option value="">Seleccione un tipo</option>
+                    <option value="RES">Res</option>
+                    <option value="POLLO">Pollo</option>
+                    <option value="CERDO">Cerdo</option>
+                    <option value="CORDERO">Cordero</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="tipoCorte">Tipo de Corte:</label>
+                <select id="tipoCorte" required>
+                    <option value="">Seleccione un corte</option>
+                    <option value="FILETE">Filete</option>
+                    <option value="MOLIDA">Molida</option>
+                    <option value="ENTERA">Entera</option>
+                    <option value="LOMO">Lomo</option>
+                    <option value="COSTILLA">Costilla</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="precio">Precio por kg (€):</label>
+                <input type="number" id="precio" step="0.01" min="5" required>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion">Descripción:</label>
+                <textarea id="descripcion" rows="4"></textarea>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="btn-primary">Guardar Carne</button>
+                <button type="button" class="btn-secondary" onclick="window.location.href='GestorProductos.html'">Cancelar</button>
+            </div>
+        </form>
     </div>
 
-    <div>
-        <label for="tipoCarne">Tipo de Carne:</label>
-        <select id="tipoCarne" required>
-            <option value="">Seleccione un tipo</option>
-            <option value="RES">Res</option>
-            <option value="POLLO">Pollo</option>
-            <option value="CERDO">Cerdo</option>
-            <option value="CORDERO">Cordero</option>
-        </select>
-    </div>
-
-    <div>
-        <label for="tipoCorte">Tipo de Corte:</label>
-        <select id="tipoCorte" required>
-            <option value="">Seleccione un corte</option>
-            <option value="FILETE">Filete</option>
-            <option value="MOLIDA">Molida</option>
-            <option value="ENTERA">Entera</option>
-            <option value="LOMO">Lomo</option>
-            <option value="COSTILLA">Costilla</option>
-        </select>
-    </div>
-
-    <div>
-        <label for="precio">Precio por kg (€):</label>
-        <input type="number" id="precio" step="0.01" min="5" required>
-    </div>
-
-    <div>
-        <label for="descripcion">Descripción:</label>
-        <textarea id="descripcion" rows="4"></textarea>
-    </div>
-
-    <button type="submit">Guardar Carne</button>
-    <button type="button" onclick="window.location.href='GestorProductos.html'">Cancelar</button>
-</form>
-
-<script src="./js/añadirCarne.js"></script>
+    <script src="./js/añadirCarne.js"></script>
 </body>
 </html>
