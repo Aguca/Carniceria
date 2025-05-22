@@ -1,0 +1,172 @@
+/* General */
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Encabezado */
+h1 {
+    background-color: #4CAF50;
+    color: black;
+    text-align: center;
+    padding: 20px 0;
+    width: 100%;
+    margin: 0;
+    font-size: 2rem;
+}
+
+/* Contenedor principal con Grid */
+.main-container {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin: 30px auto;
+    justify-content: center;
+    align-items: start;
+    max-width: 1200px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* Cuadros individuales */
+#apartado_div_1,
+#apartado_div_2 {
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 20px;
+    padding: 30px;
+    width: 300px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Títulos secundarios */
+#apartado_div_1 h2,
+#apartado_div_2 h2,
+#apartado_div_3 h2 {
+    background-color: #6a9e6b;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+/* Estilos para botones tipo enlace */
+a.boton, button {
+    display: block;
+    text-align: center;
+    background-color: #f9f5dc;
+    color: black;
+    padding: 12px 0;
+    margin: 10px auto;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    text-decoration: none;
+    width: 80%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+a.boton:hover, button:hover {
+    background-color: #e7e1c4;
+}
+
+/* Específicos para los botones de tienda y recetas */
+#boton_tinda,
+#boton_recetas {
+    width: 80%;
+}
+
+/* Formulario login */
+form div {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #aaa;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+/* Registro */
+#apartado_div_3 {
+    text-align: center;
+    margin-top: 30px;
+    color: #333;
+    grid-column: 1 / -1;
+}
+
+#apartado_div_3 a {
+    color: #3366cc;
+    text-decoration: underline;
+    background: none;
+    padding: 0;
+    font-size: 1rem;
+}
+
+/* Footer */
+footer {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: auto;
+    font-size: 0.9rem;
+}
+
+.footer-contenido {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 0 auto;
+}
+
+.footer-contenido span {
+    white-space: nowrap;
+    margin: 0;
+    padding: 0;
+}
+
+footer a {
+    color: #ffffff;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #02467e;
+    text-decoration: underline;
+}
+
+
+
+
+
+

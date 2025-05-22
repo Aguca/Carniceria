@@ -2,29 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="./css/administrador.css">
     <title>Pagina de administración</title>
 </head>
 <body>
-<h1>Panel de Administración</h1>
-<button id="logoutBtn" onclick="cerrarSesion()">Cerrar Sesión</button>
-<a href="GestorProductos.html">Ir a la pagina de gestion de productos</a>
-<h2>Gestión de Usuarios</h2>
-<table id="tablaUsuarios">
-  <thead>
-  <tr>
-    <th>ID</th>
-    <th>Nombre</th>
-    <th>Email</th>
-    <th>Activo</th>
-    <th>Acciones</th>
-  </tr>
-  </thead>
-  <tbody>
-  <!-- La lista de usuarios será cargada dinámicamente aquí -->
-  </tbody>
-</table>
+    <header class="full-width-header">
+        <h1>Panel de Administración</h1>
+        <div class="button-grid">
+            <button id="logoutBtn" onclick="cerrarSesion()">Cerrar Sesión</button>
+            <a href="GestorProductos.html">Ir a la pagina de gestion de productos</a>
+        </div>
+    </header>
 
-<script src="./js/admin.js"></script>
-<script src="./js/CerrarSesion.js"></script>
+    <main class="main-content">
+        <h2>Gestión de Usuarios</h2>
+        
+        <div class="table-wrapper">
+            <table id="tablaUsuarios">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Activo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- La lista de usuarios será cargada dinámicamente aquí -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer class="full-width-footer">
+        <div class="footer-contenido">
+            <!-- Contenido del footer -->
+        </div>
+    </footer>
+
+    <script src="./js/admin.js"></script>
+    <script src="./js/CerrarSesion.js"></script>
 </body>
 </html>
