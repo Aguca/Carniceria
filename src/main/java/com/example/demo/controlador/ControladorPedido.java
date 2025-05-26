@@ -1,9 +1,11 @@
 package com.example.demo.controlador;
 
 import com.example.demo.modelo.EntidadPedido;
+import com.example.demo.modelo.DetallePedidoDTO;
 import com.example.demo.modelo.EntidadCarne;
 import com.example.demo.modelo.EntidadDetallePedido;
 import com.example.demo.modelo.EntidadUsuario;
+import com.example.demo.modelo.PedidoDTO;
 import com.example.demo.servicio.ServicioPedidos;
 import com.example.demo.servicio.ServicioCarnes;
 
@@ -123,6 +125,30 @@ public ResponseEntity<?> obtenerPedido(@PathVariable Long id) {
         return ResponseEntity.ok(pedidos);
     }
 
+@GetMapping("/dto")
+public ResponseEntity<List<PedidoDTO>> obtenerPedidosDto() {
+    List<EntidadPedido> pedidos = servicioPedidos.obtenerTodosLosPedidos();
+
+    List<PedidoDTO> dtos = pedidos.stream().map(p -> PedidoDTO.builder()
+        .id(p.getId())
+        .fechaPedido(p.getFechaPedido())
+        .fechaEntrega(p.getFechaEntrega())
+        .entregado(p.isEntregado())
+        .pagado(p.isPagado())
+        .total(p.calcularTotal())
+        .nombreUsuario(p.getUsuario().getNombre() + " " + p.getUsuario().getApellido())
+        .detalles(p.getDetalles().stream().map(d -> DetallePedidoDTO.builder()
+            .id(d.getId())
+            .carneId(d.getCarne().getId())
+            .nombreCarne(d.getCarne().getNombre())
+            .pesoEnKilos(d.getPesoEnKilos())
+            .precioPorKilo(d.getPrecioPorKilo())
+            .subtotal(d.calcularSubtotal())
+            .build()).toList())
+        .build()).toList();
+
+    return ResponseEntity.ok(dtos);
+}
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity<?> actualizarPedido(
@@ -166,8 +192,8 @@ public ResponseEntity<?> obtenerPedido(@PathVariable Long id) {
     public ResponseEntity<?> eliminarPedido(@PathVariable Long id, HttpSession session) {
         try {
             // Validar usuario en sesión
-            EntidadUsuario usuarioSesion = (EntidadUsuario) session.getAttribute("usuario");
-            if (usuarioSesion == null) {
+            EntidadUsuario usuarioSesion1 = (EntidadUsuario) session.getAttribute("usuario");
+            if (usuarioSesion1 == null) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of(
                     "message", "No hay usuario en sesión",
                     "status", HttpStatus.UNAUTHORIZED.value()
@@ -178,7 +204,7 @@ public ResponseEntity<?> obtenerPedido(@PathVariable Long id) {
             EntidadPedido pedido = servicioPedidos.obtenerPedidoPorId(id)
                 .orElseThrow(() -> new RuntimeException("Pedido no encontrado"));
                 
-            if (!pedido.getUsuario().getId().equals(usuarioSesion.getId())) {
+            if (!pedido.getUsuario().getId().equals(usuarioSesion1.getId()) && !"admin".equals(usuarioSesion1.getTipo())) {
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Map.of(
                     "message", "No tienes permiso para eliminar este pedido",
                     "status", HttpStatus.FORBIDDEN.value()

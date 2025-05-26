@@ -93,44 +93,196 @@ html, body {
     border-bottom: 2px solid #8B4513;
 }
 
-/* TABLA - Adaptada para más columnas */
+/* ESTILOS MEJORADOS PARA LA TABLA */
 .table-wrapper {
     width: 100%;
     overflow-x: auto;
-    margin: 0 auto;
-    padding: 20px 0;
-    background-color: #FFF8F0; /* Fondo marrón claro */
-    border-radius: 10px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #FFF8F0;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(139, 69, 19, 0.1);
 }
 
-#tablaCarnes {
+#tablaPedidos {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     background-color: white;
-    box-shadow: 0 0 15px rgba(0,0,0,0.08);
-    border-radius: 8px;
+    border-radius: 10px;
     overflow: hidden;
-    margin: 0 auto;
+    box-shadow: 0 0 0 1px rgba(139, 69, 19, 0.1);
+    font-size: 0.95rem;
 }
 
-#tablaCarnes thead tr {
-    background-color: #8B4513; /* Marrón carne */
+#tablaPedidos thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+#tablaPedidos thead tr {
+    background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#tablaPedidos th {
+    padding: 15px 18px;
+    text-align: left;
+    font-weight: 600;
+    position: relative;
+}
+
+#tablaPedidos th:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 15%;
+    height: 70%;
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+#tablaPedidos td {
+    padding: 12px 18px;
+    border-bottom: 1px solid #F5E7DE;
+    vertical-align: middle;
+    color: #5D4037;
+}
+
+#tablaPedidos tbody tr:last-child td {
+    border-bottom: none;
+}
+
+#tablaPedidos tbody tr:nth-child(even) {
+    background-color: #FFF8F0;
+}
+
+#tablaPedidos tbody tr:hover {
+    background-color: #F5E7DE;
+    transform: scale(1.005);
+    box-shadow: 0 2px 10px rgba(139, 69, 19, 0.1);
+    transition: all 0.2s ease;
+}
+
+/* Estilos para celdas específicas */
+#tablaPedidos td:nth-child(5) { /* Columna Total */
+    font-weight: bold;
+    color: #8B4513;
+}
+
+#tablaPedidos td:nth-child(6), /* Columnas de estado */
+#tablaPedidos td:nth-child(7) {
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Estilos para los botones de acción */
+.acciones {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.acciones button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.acciones button i {
+    font-size: 1rem;
+}
+
+.btn-detalles {
+    background-color: #5D4037;
     color: white;
 }
 
-#tablaCarnes th, 
-#tablaCarnes td {
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid #e0e0e0;
+.btn-estado {
+    background-color: #A0522D;
+    color: white;
 }
 
-#tablaCarnes tbody tr:nth-child(even) {
-    background-color: #FFF8F0; /* Fondo marrón claro */
+.btn-eliminar {
+    background-color: #D32F2F;
+    color: white;
 }
 
-#tablaCarnes tbody tr:hover {
-    background-color: #F5E7DE; /* Marrón muy claro */
+.acciones button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+/* Efecto para celdas de estado */
+.entregado-si {
+    color: #388E3C;
+    font-weight: bold;
+}
+
+.entregado-no {
+    color: #D32F2F;
+    font-weight: bold;
+}
+
+/* Scroll personalizado para la tabla */
+.table-wrapper::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+    background: #F5E7DE;
+    border-radius: 10px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+    background: #8B4513;
+    border-radius: 10px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    #tablaPedidos {
+        font-size: 0.9rem;
+    }
+    
+    #tablaPedidos th, 
+    #tablaPedidos td {
+        padding: 10px 12px;
+    }
+    
+    .acciones {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .acciones button {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .table-wrapper {
+        padding: 10px;
+        border-radius: 8px;
+    }
+    
+    #tablaPedidos {
+        min-width: 600px; /* Forza el scroll horizontal en móviles */
+    }
+    
+    #tablaPedidos th {
+        padding: 12px 8px;
+    }
 }
 
 /* PIE DE PÁGINA */

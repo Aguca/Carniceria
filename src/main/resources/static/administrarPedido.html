@@ -3,37 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./css/gestorProductos.css">
-    <title>Gestión de Carnes</title>
+    <title>Gestión de Pedidos</title>
 </head>
 <body>
     <header class="full-width-header">
-        <h1>Panel de Gestión de Carnes</h1>
+        <h1>Panel de Gestión de Pedidos</h1>
         <div class="button-grid">
             <button id="logoutBtn" onclick="cerrarSesion()">Cerrar Sesión</button>
-            <button id="botonCrearProducto" onclick="window.location.href = 'CrearCarne.html'">Añadir Producto</button>
             <a href="administrador.html" class="boton-volver">Volver al panel</a>
-            <a href="administrarPedido.html">Ir a la pagina de gestion de pedidos</a>
         </div>
     </header>
 
     <main class="main-content">
-        <h2>Listado de Carnes</h2>
+        <h2>Listado de Pedidos</h2>
         
         <div class="table-wrapper">
-            <table id="tablaCarnes">
+            <table id="tablaPedidos">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Tipo de Carne</th>
-                        <th>Tipo de Corte</th>
-                        <th>Precio (€/kg)</th>
-                        <th>Descripción</th>
-                        <th>Pagado</th>
+                        <th>Usuario</th>
+                        <th>Fecha Pedido</th>
+                        <th>Fecha Entrega</th>
+                        <th>Total</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- La lista de carnes será cargada dinámicamente aquí -->
+                    <!-- Los pedidos se cargarán aquí dinámicamente -->
                 </tbody>
             </table>
         </div>
@@ -45,7 +43,7 @@
         </div>
     </footer>
 
-    <script src="./js/gestionCarnes.js"></script>
+    <script src="./js/administrarPedido.js"></script>
     <script src="./js/CerrarSesion.js"></script>
 </body>
 </html>
