@@ -16,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.servlet.http.HttpSession;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -104,6 +106,7 @@ public ResponseEntity<?> crearPedido(@RequestBody EntidadPedido pedidoRequest, H
     }
 }
 
+
 @GetMapping("/{id}")
 public ResponseEntity<?> obtenerPedido(@PathVariable Long id) {
     java.util.Optional<EntidadPedido> pedidoOpt = servicioPedidos.obtenerPedidoPorId(id);
@@ -186,6 +189,49 @@ public ResponseEntity<List<PedidoDTO>> obtenerPedidosDto() {
                 ));
         }
     }
+
+    
+@GetMapping("/{id}/detalles")
+public ResponseEntity<PedidoDTO> obtenerDetallesPedido(@PathVariable Long id) {
+    // Manejo correcto del Optional
+    EntidadPedido pedido = servicioPedidos.obtenerPedidoPorId(id)
+        .orElse(null);
+    
+    if (pedido == null) {
+        return ResponseEntity.notFound().build();
+    }
+    
+    // Construcción de los detalles
+    List<DetallePedidoDTO> detallesDTO = new ArrayList<>();
+    for (EntidadDetallePedido detalle : pedido.getDetalles()) {
+        EntidadCarne carne = detalle.getCarne();
+        DetallePedidoDTO detalleDTO = DetallePedidoDTO.builder()
+            .id(detalle.getId())
+            .carneId(carne.getId())
+            .nombreCarne(carne.getNombre())
+            .tipoCorte(carne.getTipoCorte())  // Ahora este método existe
+            .pesoEnKilos(detalle.getPesoEnKilos())
+            .precioPorKilo(detalle.getPrecioPorKilo())
+            .subtotal(detalle.calcularSubtotal())
+            .build();
+        detallesDTO.add(detalleDTO);
+    }
+    
+    // Construcción del DTO principal
+    PedidoDTO dto = PedidoDTO.builder()
+        .id(pedido.getId())
+        .fechaPedido(pedido.getFechaPedido())
+        .fechaEntrega(pedido.getFechaEntrega())
+        .entregado(pedido.isEntregado())
+        .pagado(pedido.isPagado())
+        .total(pedido.calcularTotal())
+        .nombreUsuario(pedido.getUsuario().getNombre() + " " + pedido.getUsuario().getApellido())
+        .detalles(detallesDTO)
+        .build();
+
+    return ResponseEntity.ok(dto);
+}
+
 
     @DeleteMapping("/{id}")
     @Transactional
