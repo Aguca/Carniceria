@@ -1,14 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hermanos Gutiérrez</title>
+    <link rel="stylesheet" href="./css/usuario.css">
 </head>
 <body>
-    <h1>Usuario normal</h1>
-    <button id="logoutBtn" onclick="cerrarSesion()">Cerrar Sesión</button>
-    <a href="paginaPrincipalTienda.html">Ir a la pagina principal de la tienda</a>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="/fotos/descarga.jpg" alt="Logo Hermanos Gutiérrez">
+            </div>
+            <div class="header-content">
+                <h1>Hermanos Gutiérrez</h1>
+                <div class="header-buttons">
+                    <a href="libro_recetas.html" class="boton">Libro de Recetas</a>
+                    <a href="perfil.html" class="boton">Perfil</a>
+                </div>
+            </div>
+        </div>
+    </header>
 
-<script src="./js/CerrarSesion.js"></script>
+    <main>
+        <!-- Pasarela de imágenes automática -->
+        <div class="image-carousel">
+            <div class="carousel-container">
+                <div class="carousel-slide active">
+                    <img src="/fotos/oferta1.jpg" alt="Oferta 1">
+                </div>
+                <div class="carousel-slide">
+                    <img src="/fotos/red-meat.jpg" alt="Oferta 2">
+                </div>
+                <div class="carousel-slide">
+                    <img src="/fotos/oferta1.jpg" alt="Oferta 3">
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenido de usuario -->
+        <div class="user-container">
+            <h2 id="nombreUsuario">Cargando usuario...</h2>
+            <button id="logoutBtn" class="boton" onclick="cerrarSesion()">Cerrar Sesión</button>
+            <a href="paginaPrincipalTienda.html" class="boton">Ir a la pagina principal de la tienda</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-contenido">
+            <span>© 2023 Hermanos Gutiérrez</span>
+            <a href="#">Política de privacidad</a>
+            <a href="#">Términos de servicio</a>
+            <a href="#">Contacto</a>
+        </div>
+    </footer>
+
+    <script src="./js/CerrarSesion.js"></script>
+    <script src="./js/carrusel.js"></script>
+    <script src="./js/obtenerUsuario.js"></script>
 </body>
 </html>
