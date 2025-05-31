@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
             tipoCorte: carneActual.tipoCorte,
             cantidad: cantidad,
             precioPorKg: precioPorKg,
-            precioTotal: parseFloat(((cantidad * precioPorKg)*100).toFixed(2)), // Redondeo seguro
+            precioTotal: parseFloat((cantidad * precioPorKg).toFixed(2)), // Redondeo seguro
             descripcion: carneActual.descripcion || ''
         };
 

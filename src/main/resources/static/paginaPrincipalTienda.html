@@ -2,55 +2,117 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Productos Carnicería</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos Carnicería Hermanos Gutiérrez</title>
+    <link rel="stylesheet" href="./css/paginaTienda.css">
 </head>
 <body>
-<h1>Productos Disponibles</h1>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="/fotos/descarga.jpg" alt="Logo Hermanos Gutiérrez">
+            </div>
+            <div class="header-content">
+                <h1>Hermanos Gutiérrez</h1>
+                <div class="header-buttons">
+                    <a href="libro_recetas.html" class="boton">Libro de Recetas</a>
+                    <a href="index.html" class="boton">Cerrar Sesion</a>
+                    <a href="perfil.html" class="boton">Perfil</a>
+                    <a href="carrito.html" class="boton">Carrito</a>
+                </div>
+            </div>
+        </div>
+    </header>
 
-<a href="carrito.html">carrito</a>
-<!-- Sección de Carnes -->
-<section>
-    <h2>Tipos de Carne</h2>
-    <ul>
-        <li><a href="#" onclick="guardarCarne('RES')">Res</a></li>
-        <li><a href="#" onclick="guardarCarne('POLLO')">Pollo</a></li>
-        <li><a href="#" onclick="guardarCarne('CERDO')">Cerdo</a></li>
-        <li><a href="#" onclick="guardarCarne('CORDERO')">Cordero</a></li>
-        <li><a href="#" onclick="guardarCarne('PAVO')">Pavo</a></li>
-    </ul>
-</section>
+    <main class="productos-container">
+        <div class="productos-listas">
+            <h2 id="nombreUsuario">Bienvenido</h2>
+            
+            <!-- Sección de Carnes -->
+            <section class="productos-seccion">
+                <h2>Tipos de Carne</h2>
+                <ul>
+                    <li><a href="#" onclick="guardarCarne('RES')">Res</a></li>
+                    <li><a href="#" onclick="guardarCarne('POLLO')">Pollo</a></li>
+                    <li><a href="#" onclick="guardarCarne('CERDO')">Cerdo</a></li>
+                    <li><a href="#" onclick="guardarCarne('CORDERO')">Cordero</a></li>
+                    <li><a href="#" onclick="guardarCarne('PAVO')">Pavo</a></li>
+                </ul>
+            </section>
 
-<!-- Sección de Quesos -->
-<section>
-    <h2>Quesos</h2>
-    <ul>
-        <li><a href="queso-cheddar.html">Queso Cheddar</a></li>
-        <li><a href="queso-mozzarella.html">Queso Mozzarella</a></li>
-        <li><a href="queso-parmesano.html">Queso Parmesano</a></li>
-        <li><a href="queso-azul.html">Queso Azul</a></li>
-    </ul>
-</section>
+            <!-- Sección de Quesos -->
+            <section class="productos-seccion">
+                <h2>Quesos</h2>
+                <ul>
+                    <li><a href="queso-cheddar.html">Queso Cheddar</a></li>
+                    <li><a href="queso-mozzarella.html">Queso Mozzarella</a></li>
+                    <li><a href="queso-parmesano.html">Queso Parmesano</a></li>
+                    <li><a href="queso-azul.html">Queso Azul</a></li>
+                </ul>
+            </section>
 
-<!-- Sección de Especias -->
-<section>
-    <h2>Especias</h2>
-    <ul>
-        <li><a href="pimienta-negra.html">Pimienta Negra</a></li>
-        <li><a href="comino.html">Comino</a></li>
-        <li><a href="oregano.html">Orégano</a></li>
-        <li><a href="pimenton.html">Pimentón</a></li>
-        <li><a href="canela.html">Canela</a></li>
-    </ul>
-</section>
+            <!-- Sección de Especias -->
+            <section class="productos-seccion">
+                <h2>Especias</h2>
+                <ul>
+                    <li><a href="pimienta-negra.html">Pimienta Negra</a></li>
+                    <li><a href="comino.html">Comino</a></li>
+                    <li><a href="oregano.html">Orégano</a></li>
+                    <li><a href="pimenton.html">Pimentón</a></li>
+                    <li><a href="canela.html">Canela</a></li>
+                </ul>
+            </section>
+        </div>
 
-<script>
-    function guardarCarne(tipoCarne) {
-        // Guardar en localStorage
-        localStorage.setItem('carneElegida', tipoCarne);
+        <!-- Carrusel de imágenes a la derecha -->
+        <div class="image-carousel">
+            <div class="carousel-container">
+                <div class="carousel-slide active">
+                    <img src="/fotos/oferta1.jpg" alt="Oferta especial">
+                </div>
+                <div class="carousel-slide">
+                    <img src="/fotos/red-meat.jpg" alt="Cortes de carne">
+                </div>
+                <div class="carousel-slide">
+                    <img src="/fotos/oferta1.jpg" alt="Promoción">
+                </div>
+            </div>
+        </div>
+    </main>
 
-        // Opcional: Redirigir a CarneElegida.html
-        window.location.href = 'CarneElegida.html';
-    }
-</script>
+    <footer>
+        <div class="footer-contenido">
+            <span>© 2023 Hermanos Gutiérrez</span>
+            <a href="#">Política de privacidad</a>
+            <a href="#">Términos de servicio</a>
+            <a href="#">Contacto</a>
+        </div>
+    </footer>
+
+    <script>
+        function guardarCarne(tipoCarne) {
+            localStorage.setItem('carneElegida', tipoCarne);
+            window.location.href = 'CarneElegida.html';
+        }
+
+        // Obtener y mostrar nombre de usuario
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/obtenerUsuarioSesion', {
+                credentials: 'include'
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('No hay sesión');
+                return response.json();
+            })
+            .then(usuario => {
+                if (usuario && usuario.nombre) {
+                    document.getElementById('nombreUsuario').textContent = 
+                        `Bienvenido, ${usuario.nombre}`;
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+    <script src="./js/carrusel.js"></script>
 </body>
 </html>

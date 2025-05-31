@@ -1,0 +1,252 @@
+/* Estilos generales */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 0;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo img {
+    height: 60px;
+    width: auto;
+    border-radius: 50%;
+    margin-right: 20px;
+    border: 2px solid white;
+}
+
+.header-content {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.header-content h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: white;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+/* Main content - Grid Layout */
+.productos-container {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr; /* Más espacio para listas */
+    gap: 40px;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+    align-items: start;
+}
+
+.productos-listas {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Secciones de productos */
+.productos-seccion {
+    background-color: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.productos-seccion:hover {
+    transform: translateY(-5px);
+}
+
+.productos-seccion h2 {
+    color: #4CAF50;
+    border-bottom: 2px solid #4CAF50;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.productos-seccion ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.productos-seccion li {
+    margin-bottom: 12px;
+}
+
+.productos-seccion a {
+    color: #333;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: all 0.3s;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.productos-seccion a:hover {
+    color: white;
+    background-color: #6a9e6b;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Carrusel */
+.image-carousel {
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.carousel-container {
+    display: flex;
+    width: 100%;
+    height: 500px;
+}
+
+.carousel-slide {
+    min-width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Nombre de usuario */
+#nombreUsuario {
+    background-color: #6a9e6b;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+/* Botones */
+.boton {
+    display: inline-block;
+    text-align: center;
+    background-color: #f9f5dc;
+    color: #333;
+    padding: 12px 25px;
+    margin: 5px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.boton:hover {
+    background-color: #e7e1c4;
+    transform: translateY(-2px);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+/* Footer */
+footer {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 25px 0;
+    margin-top: auto;
+}
+
+.footer-contenido {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+footer a {
+    color: white;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: #f9f5dc;
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .productos-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .image-carousel {
+        grid-row: 2;
+        position: static;
+        height: 350px;
+        margin-top: 30px;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .header-buttons {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .header-buttons {
+        flex-direction: column;
+    }
+    
+    .boton {
+        width: 100%;
+    }
+    
+    .productos-seccion {
+        padding: 15px;
+    }
+}

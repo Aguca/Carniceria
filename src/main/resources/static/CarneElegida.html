@@ -1,28 +1,99 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Administracion de Carnes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración de Carnes | Hermanos Gutiérrez</title>
+    <link rel="stylesheet" href="./css/carne-elegida.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Estilos adicionales para el botón Volver */
+        .btn-volver {
+            display: inline-block;
+            background-color: var(--color-boton);
+            color: var(--color-texto);
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border: 2px solid var(--color-secundario);
+        }
+        
+        .btn-volver:hover {
+            background-color: var(--color-boton-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .btn-volver i {
+            margin-right: 8px;
+        }
+        
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    </style>
 </head>
 <body>
-<h1 id="titulo-carne">Carnes</h1>
+    <header>
+        <div class="wave"></div>
+        <div class="header-content">
+            <a href="javascript:history.back()" class="btn-volver">
+                <i class="fas fa-arrow-left"></i> Volver
+            </a>
+            <h1 id="titulo-carne">Carnes</h1>
+            <p id="subtitulo">Selecciona tu corte preferido</p>
+        </div>
+    </header>
 
-<table id="tablaCarnes" border="1">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Tipo de Corte</th>
-        <th>Descripcion</th>
-        <th>Precio</th>
-        <th>Acciones</th>
-    </tr>
-    </thead>
-    <tbody>
-    <!-- Las filas se generarán dinámicamente -->
-    </tbody>
-</table>
+    <main class="container">
+        <div class="table-wrapper">
+            <table id="tablaCarnes">
+                <thead>
+                    <tr>
+                        <th data-label="ID"><i class="fas fa-hashtag"></i> ID</th>
+                        <th data-label="Nombre"><i class="fas fa-tag"></i> Nombre</th>
+                        <th data-label="Tipo"><i class="fas fa-utensils"></i> Tipo de Corte</th>
+                        <th data-label="Descripción"><i class="fas fa-align-left"></i> Descripción</th>
+                        <th data-label="Precio"><i class="fas fa-tag"></i> Precio</th>
+                        <th data-label="Acciones"><i class="fas fa-cog"></i> Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Las filas se generarán dinámicamente -->
+                    <tr class="loading-row">
+                        <td colspan="6">Cargando productos...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
 
-<script src="./js/GestionDeCompra.js"></script>
+    <footer>
+        <div class="footer-content">
+            <p>© 2023 Carnicería Hermanos Gutiérrez | Todos los derechos reservados</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./js/GestionDeCompra.js"></script>
+    <script>
+        // Eliminar la fila de carga cuando se carguen los datos
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                const loadingRow = document.querySelector('.loading-row');
+                if(loadingRow) loadingRow.remove();
+            }, 1000);
+        });
+    </script>
 </body>
 </html>
