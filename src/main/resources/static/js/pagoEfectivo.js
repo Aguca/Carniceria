@@ -94,7 +94,6 @@ async function crearPedido() {
         // 6. Procesar respuesta exitosa
         const pedidoCreado = await response.json();
         localStorage.removeItem('carrito');
-        window.location.href = `/pedidos/${pedidoCreado.id}?exito=true`;
         
     } catch (error) {
         console.error('Error al crear pedido:', error);

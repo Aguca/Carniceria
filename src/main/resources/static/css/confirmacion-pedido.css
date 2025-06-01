@@ -1,0 +1,190 @@
+:root {
+    --color-primario: #4CAF50;
+    --color-secundario: #3e8e41;
+    --color-fondo: #f8f9fa;
+    --color-texto: #333;
+    --color-borde: #dee2e6;
+    --color-exito: #28a745;
+    --sombra: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    --sombra-hover: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.15);
+    --radio-borde: 8px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    line-height: 1.6;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Botón Volver */
+.btn-volver {
+    display: inline-block;
+    background-color: var(--color-primario);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    box-shadow: var(--sombra);
+    border: 2px solid var(--color-secundario);
+}
+
+.btn-volver:hover {
+    background-color: var(--color-secundario);
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-hover);
+}
+
+.btn-volver i {
+    margin-right: 8px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: var(--color-primario);
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Tarjeta del formulario */
+.card {
+    background-color: white;
+    padding: 30px;
+    border-radius: var(--radio-borde);
+    box-shadow: var(--sombra);
+}
+
+/* Grupos de formulario */
+.form-group {
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--color-primario);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.input-container {
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.input-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-primario);
+}
+
+input[type="date"] {
+    width: 100%;
+    padding: 12px 40px 12px 15px;
+    border: 2px solid var(--color-borde);
+    border-radius: var(--radio-borde);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+input[type="date"]:focus {
+    outline: none;
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+input[readonly] {
+    background-color: #f1f1f1;
+    cursor: not-allowed;
+}
+
+.info-text {
+    font-size: 0.85rem;
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* Botón de confirmación */
+.btn-confirmar {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--color-exito);
+    color: white;
+    border: none;
+    border-radius: var(--radio-borde);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    box-shadow: var(--sombra);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-confirmar:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-hover);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .card {
+        padding: 20px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 15px 10px;
+    }
+    
+    h1 {
+        font-size: 1.6rem;
+    }
+    
+    .btn-volver {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+    
+    input[type="date"] {
+        padding: 10px 35px 10px 12px;
+    }
+}

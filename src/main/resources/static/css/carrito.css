@@ -1,0 +1,220 @@
+:root {
+    --color-primario: #4CAF50;
+    --color-secundario: #3e8e41;
+    --color-fondo: #f8f9fa;
+    --color-texto: #333;
+    --color-borde: #dee2e6;
+    --color-boton: #f8f9fa;
+    --color-boton-hover: #e2e6ea;
+    --color-peligro: #dc3545;
+    --color-exito: #28a745;
+    --color-info: #17a2b8;
+    --sombra: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    line-height: 1.6;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Botón Volver */
+.btn-volver {
+    display: inline-block;
+    background-color: var(--color-primario);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    box-shadow: var(--sombra);
+    border: 2px solid var(--color-secundario);
+}
+
+.btn-volver:hover {
+    background-color: var(--color-secundario);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.btn-volver i {
+    margin-right: 8px;
+}
+
+h1 {
+    color: var(--color-primario);
+    text-align: center;
+    margin: 20px 0 30px;
+    font-size: 2.2rem;
+}
+
+/* Estilos para la tabla */
+#tabla-carrito {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    background-color: white;
+    box-shadow: var(--sombra);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#tabla-carrito thead {
+    background-color: var(--color-primario);
+    color: white;
+}
+
+#tabla-carrito th, #tabla-carrito td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-borde);
+}
+
+#tabla-carrito th {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+#tabla-carrito tbody tr:last-child td {
+    border-bottom: none;
+}
+
+#tabla-carrito tbody tr:hover {
+    background-color: rgba(76, 175, 80, 0.05);
+}
+
+.carrito-vacio {
+    text-align: center;
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* Estilos para el total */
+.total {
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: right;
+    margin: 20px 0;
+    padding: 15px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: var(--sombra);
+}
+
+/* Contenedor de botones */
+.botones-carrito {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+/* Estilos base para botones */
+button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: var(--sombra);
+}
+
+button i {
+    font-size: 1.1rem;
+}
+
+/* Botón vaciar carrito */
+.vaciar-carrito {
+    background-color: var(--color-peligro);
+    color: white;
+    flex: 1;
+    min-width: 200px;
+}
+
+.vaciar-carrito:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+}
+
+/* Botón pago en efectivo */
+.efectivo {
+    background-color: var(--color-exito);
+    color: white;
+    flex: 1;
+    min-width: 200px;
+}
+
+.efectivo:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+/* Botón pago con tarjeta */
+.tarjeta {
+    background-color: var(--color-info);
+    color: white;
+    flex: 1;
+    min-width: 200px;
+}
+
+.tarjeta:hover {
+    background-color: #138496;
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #tabla-carrito {
+        display: block;
+        overflow-x: auto;
+    }
+    
+    .botones-carrito {
+        flex-direction: column;
+    }
+    
+    button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        padding: 10px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    #tabla-carrito th, 
+    #tabla-carrito td {
+        padding: 8px 10px;
+        font-size: 0.85rem;
+    }
+    
+    .btn-volver {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+}

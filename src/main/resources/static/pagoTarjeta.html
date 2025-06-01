@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación de Pedido | Hermanos Gutiérrez</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/confirmacion-pedido-trajeta.css">
+</head>
+<body>
+    <a href="carrito.html" class="btn-volver">
+        <i class="fas fa-arrow-left"></i> Volver al Carrito
+    </a>
+
+    <div class="container">
+        <h1><i class="fas fa-clipboard-check"></i> Confirmación de Pedido</h1>
+        
+        <div class="card">
+            <div class="form-group">
+                <label for="fecha-hoy">
+                    <i class="fas fa-calendar-day"></i> Fecha actual:
+                </label>
+                <div class="input-container">
+                    <input type="date" id="fecha-hoy" readonly>
+                    <i class="fas fa-calendar-alt input-icon"></i>
+                </div>
+                <p class="info-text">Esta es la fecha en la que realizas el pedido</p>
+            </div>
+            
+            <div class="form-group">
+                <label for="fecha-entrega">
+                    <i class="fas fa-truck"></i> Fecha de entrega:
+                </label>
+                <div class="input-container">
+                    <input type="date" id="fecha-entrega" required>
+                    <i class="fas fa-calendar-check input-icon"></i>
+                </div>
+                <p class="info-text">Selecciona la fecha en la que deseas recibir tu pedido</p>
+            </div>
+
+            <!-- Formulario de Tarjeta de Crédito -->
+            <div class="credit-card-form">
+                <h2><i class="fas fa-credit-card"></i> Datos de Pago</h2>
+                
+                <div class="form-group">
+                    <label for="card-number">Número de Tarjeta:</label>
+                    <div class="input-container">
+                        <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                        <i class="fas fa-credit-card input-icon"></i>
+                    </div>
+                    <div class="card-icons">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visa/visa-original.svg" alt="Visa" class="card-type">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mastercard/mastercard-original.svg" alt="Mastercard" class="card-type">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="card-expiry">Fecha de Expiración:</label>
+                        <input type="text" id="card-expiry" placeholder="MM/AA" maxlength="5" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="card-cvc">Código CVC:</label>
+                        <div class="input-container">
+                            <input type="text" id="card-cvc" placeholder="123" maxlength="3" required>
+                            <i class="fas fa-lock input-icon"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="card-name">Nombre en la Tarjeta:</label>
+                    <input type="text" id="card-name" placeholder="JUAN PEREZ" required>
+                </div>
+            </div>
+            
+            <button class="btn-confirmar" id="confirmar-pago" disabled>
+                <i class="fas fa-check-circle"></i> Confirmar Pago y Pedido
+            </button>
+        </div>
+    </div>
+
+    <script src="./js/pagoEfectivo.js"></script>
+    <script>
+        // Validación del formulario
+        document.addEventListener('DOMContentLoaded', function() {
+            const formInputs = document.querySelectorAll('input[required]');
+            const confirmBtn = document.getElementById('confirmar-pago');
+            
+            // Formatear número de tarjeta
+            const cardNumber = document.getElementById('card-number');
+            cardNumber.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\s+/g, '');
+                if (value.length > 0) {
+                    value = value.match(new RegExp('.{1,4}', 'g')).join(' ');
+                }
+                e.target.value = value;
+                validateForm();
+            });
+            
+            // Formatear fecha de expiración
+            const cardExpiry = document.getElementById('card-expiry');
+            cardExpiry.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length >= 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                }
+                e.target.value = value;
+                validateForm();
+            });
+            
+            // Validar todos los campos
+            function validateForm() {
+                let isValid = true;
+                formInputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        isValid = false;
+                    }
+                });
+                
+                // Validación adicional para fechas
+                const fechaEntrega = document.getElementById('fecha-entrega');
+                if (!fechaEntrega.value) isValid = false;
+                
+                confirmBtn.disabled = !isValid;
+            }
+            
+            // Escuchar cambios en todos los inputs
+            formInputs.forEach(input => {
+                input.addEventListener('input', validateForm);
+            });
+            
+            document.getElementById('fecha-entrega').addEventListener('change', validateForm);
+        });
+    </script>
+</body>
+</html>
