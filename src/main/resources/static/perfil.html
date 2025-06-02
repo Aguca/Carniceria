@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - Carnicería Hermanos Gutiérrez</title>
+    <link rel="stylesheet" href="./css/perfil.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="profile-header">
+        <div class="header-content">
+            <h1>Carnicería Hermanos Gutiérrez</h1>
+            <nav>
+                <a href="usuario.html" class="nav-link">Volver a la Tienda</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="profile-container">
+        <h2 class="profile-title">Mi Perfil</h2>
+        
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="avatar-placeholder">
+                    <span id="avatarInitials"></span>
+                </div>
+                <h3 id="userFullName"></h3>
+                <p id="userType" class="user-type"></p>
+            </div>
+            
+            <div class="profile-details">
+                <div class="detail-group">
+                    <h4>Información Personal</h4>
+                    <div class="detail-item">
+                        <span class="detail-label">Email:</span>
+                        <span id="userEmail" class="detail-value"></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">DNI:</span>
+                        <span id="userDni" class="detail-value"></span>
+                    </div>
+                </div>
+                
+                <div class="detail-group">
+                    <h4>Datos de Contacto</h4>
+                    <div class="detail-item">
+                        <span class="detail-label">Dirección:</span>
+                        <span id="userAddress" class="detail-value"></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Teléfono:</span>
+                        <span id="userPhone" class="detail-value"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="profile-actions">
+                <button id="editBtn" class="btn-edit">Editar Perfil</button>
+                <button id="changePassBtn" class="btn-secondary">Cambiar Contraseña</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="profile-footer">
+        <p>© 2023 Carnicería Hermanos Gutiérrez - Todos los derechos reservados</p>
+    </footer>
+
+    <script>
+            document.addEventListener('DOMContentLoaded', function() {
+        // Obtener datos del usuario desde la sesión
+        fetch('/usuario/obtenerUsuarioSesion', {
+            credentials: 'include',
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.status === 401) {
+                // Sesión no válida o expirada
+                mostrarErrorSesion();
+                return Promise.reject('Sesión no válida');
+            }
+            if (!response.ok) {
+                throw new Error(`Error HTTP: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(usuario => {
+            if (!usuario) {
+                throw new Error('No se recibieron datos del usuario');
+            }
+            
+            // Mostrar datos en el perfil
+            mostrarDatosUsuario(usuario);
+            
+            // Configurar eventos de los botones
+            configurarBotones();
+        })
+        .catch(error => {
+            console.error('Error al cargar perfil:', error);
+            manejarErrorCarga(error);
+        });
+
+        // Función para mostrar datos del usuario
+        function mostrarDatosUsuario(usuario) {
+            document.getElementById('userFullName').textContent = `${usuario.nombre} ${usuario.apellido}`;
+            document.getElementById('userType').textContent = usuario.tipo === 'ADMIN' ? 'Administrador' : 'Cliente';
+            document.getElementById('userEmail').textContent = usuario.email;
+            document.getElementById('userDni').textContent = usuario.dni;
+            document.getElementById('userAddress').textContent = usuario.calle;
+            document.getElementById('userPhone').textContent = usuario.telefono;
+            
+            // Generar avatar con iniciales
+            const initials = usuario.nombre.charAt(0) + usuario.apellido.charAt(0);
+            document.getElementById('avatarInitials').textContent = initials;
+        }
+
+        // Función para configurar eventos de botones
+        function configurarBotones() {
+            document.getElementById('editBtn').addEventListener('click', function() {
+                window.location.href = 'editarPerfil.html';
+            });
+
+            document.getElementById('changePassBtn').addEventListener('click', function() {
+                window.location.href = 'cambiarContrasena.html';
+            });
+        }
+
+        // Función para manejar errores de sesión
+        function mostrarErrorSesion() {
+            // Puedes usar SweetAlert o mostrar un mensaje en la página
+            const errorHTML = `
+                <div class="error-message">
+                    <p>Su sesión ha expirado o no tiene permisos</p>
+                    <a href="index.html" class="btn-login">Volver a iniciar sesión</a>
+                </div>
+            `;
+            document.querySelector('.profile-card').innerHTML = errorHTML;
+        }
+
+        // Función para manejar otros errores
+        function manejarErrorCarga(error) {
+            const errorHTML = `
+                <div class="error-message">
+                    <p>Error al cargar el perfil: ${error.message}</p>
+                    <button onclick="window.location.reload()" class="btn-retry">Reintentar</button>
+                </div>
+            `;
+            document.querySelector('.profile-card').innerHTML = errorHTML;
+        }
+    });
+    </script>
+</body>
+</html>
