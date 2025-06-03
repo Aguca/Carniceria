@@ -65,3 +65,25 @@ async function guardarCambios(event) {
         alert('Error al guardar: ' + error.message);
     }
 }
+
+// Función para cancelar la edición
+function cancelarEdicion() {
+    // Verificar si hay cambios no guardados
+    const formulario = document.getElementById('formularioEditarCarne');
+    const inputs = formulario.querySelectorAll('input, select, textarea');
+    let hayCambios = false;
+
+    inputs.forEach(input => {
+        if (input.defaultValue !== input.value) {
+            hayCambios = true;
+        }
+    });
+
+    if (hayCambios) {
+        if (confirm('¿Estás seguro de que deseas cancelar? Tienes cambios sin guardar que se perderán.')) {
+            window.location.href = 'gestorProductos.html';
+        }
+    } else {
+        window.location.href = 'gestorProductos.html';
+    }
+}

@@ -49,20 +49,18 @@ html, body {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* ===== CONTENEDOR DE BOTONES ORIGINAL ===== */
+/* ===== CONTENEDOR DE BOTONES ===== */
 .button-grid {
   display: grid;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: repeat(2, auto);
   justify-content: center;
   gap: 15px;
   margin-top: 10px;
 }
 
-/* ===== BOTONES ORIGINALES ===== */
+/* ===== BOTONES ===== */
 #logoutBtn, 
-#botonCrearProducto,
-.boton-volver,
-.button-grid a {
+.boton-volver {
   padding: 10px 15px;
   font-size: 0.9rem;
   border: none;
@@ -80,11 +78,6 @@ html, body {
   color: white;
 }
 
-#botonCrearProducto {
-  background-color: var(--color-exito);
-  color: white;
-}
-
 .boton-volver {
   background-color: var(--color-info);
   color: white;
@@ -93,16 +86,8 @@ html, body {
   justify-content: center;
 }
 
-.button-grid a[href="administrarPedido.html"] {
-  background-color: var(--color-advertencia);
-  color: white;
-  grid-column: span 3;
-}
-
 #logoutBtn:hover, 
-#botonCrearProducto:hover,
-.boton-volver:hover,
-.button-grid a[href="administrarPedido.html"]:hover {
+.boton-volver:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   opacity: 0.9;
@@ -138,7 +123,7 @@ html, body {
   box-shadow: 0 4px 20px rgba(139, 69, 19, 0.1);
 }
 
-#tablaCarnes {
+#tablaPedidos {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
@@ -149,27 +134,27 @@ html, body {
   font-size: 0.95rem;
 }
 
-#tablaCarnes thead {
+#tablaPedidos thead {
   position: sticky;
   top: 0;
   z-index: 10;
 }
 
-#tablaCarnes thead tr {
+#tablaPedidos thead tr {
   background: linear-gradient(135deg, var(--color-primario), var(--color-secundario));
   color: white;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
-#tablaCarnes th {
+#tablaPedidos th {
   padding: 1rem 1.25rem;
   text-align: left;
   font-weight: 600;
   position: relative;
 }
 
-#tablaCarnes th:not(:last-child)::after {
+#tablaPedidos th:not(:last-child)::after {
   content: "";
   position: absolute;
   right: 0;
@@ -179,31 +164,201 @@ html, body {
   background-color: rgba(255, 255, 255, 0.3);
 }
 
-#tablaCarnes td {
+#tablaPedidos td {
   padding: 0.75rem 1.25rem;
   border-bottom: 1px solid #F5E7DE;
   vertical-align: middle;
   color: var(--color-oscuro);
 }
 
-#tablaCarnes tbody tr:last-child td {
+#tablaPedidos tbody tr:last-child td {
   border-bottom: none;
 }
 
-#tablaCarnes tbody tr:nth-child(even) {
+#tablaPedidos tbody tr:nth-child(even) {
   background-color: var(--color-claro);
 }
 
-#tablaCarnes tbody tr:hover {
+#tablaPedidos tbody tr:hover {
   background-color: #F5E7DE;
   transform: scale(1.005);
   box-shadow: 0 2px 10px rgba(139, 69, 19, 0.1);
   transition: var(--transicion);
 }
 
-#tablaCarnes td:nth-child(5) {
+/* Estilos para columnas específicas */
+#tablaPedidos td:nth-child(5) { /* Columna Total */
   font-weight: bold;
   color: var(--color-primario);
+}
+
+#tablaPedidos td:nth-child(6), /* Columnas de estado */
+#tablaPedidos td:nth-child(7) {
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Estilos para los botones de acción */
+.acciones {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.acciones button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-detalles {
+  background-color: var(--color-oscuro);
+  color: white;
+}
+
+.btn-estado {
+  background-color: var(--color-secundario);
+  color: white;
+}
+
+.btn-eliminar {
+  background-color: var(--color-peligro);
+  color: white;
+}
+
+.acciones button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+/* Efecto para celdas de estado */
+.entregado-si {
+  color: var(--color-exito);
+  font-weight: bold;
+}
+
+.entregado-no {
+  color: var(--color-peligro);
+  font-weight: bold;
+}
+
+/* ===== MODAL ===== */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  overflow: auto;
+}
+
+.modal-contenido {
+  background-color: #f8f9fa;
+  margin: 5% auto;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  width: 80%;
+  max-width: 800px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.cerrar-modal {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cerrar-modal:hover {
+  color: black;
+}
+
+#modalPedidoId {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  color: #333;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.info-general {
+  margin-bottom: 20px;
+}
+
+.info-item {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.info-label {
+  font-weight: bold;
+  min-width: 120px;
+}
+
+/* Estilos para la tabla de detalles */
+.detalles-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.detalles-table th, .detalles-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.detalles-table th {
+  background-color: #f2f2f2;
+  font-weight: 600;
+}
+
+.detalles-table tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+.producto-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.producto-imagen {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.total-label {
+  text-align: right;
+  font-weight: bold;
+}
+
+.total-value {
+  font-weight: bold;
+  color: var(--color-primario);
+}
+
+.no-productos {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  margin-top: 20px;
+}
+
+.error {
+  color: var(--color-peligro);
 }
 
 /* ===== PIE DE PÁGINA ===== */
@@ -216,57 +371,30 @@ html, body {
   margin-top: auto;
 }
 
-/* ===== MODAL ===== */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  overflow: auto;
-}
-
-.modal-contenido {
-  background-color: #f8f9fa;
-  margin: 5% auto;
-  padding: 2rem;
-  border-radius: 0.5rem;
-  width: 90%;
-  max-width: 800px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  position: relative;
-}
-
-.cerrar-modal {
-  position: absolute;
-  top: 1rem;
-  right: 1.5rem;
-  font-size: 1.75rem;
-  font-weight: bold;
-  color: #aaa;
-  cursor: pointer;
-  transition: var(--transicion);
-}
-
-.cerrar-modal:hover {
-  color: var(--color-oscuro);
-}
-
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
   .button-grid {
-    grid-template-columns: repeat(2, auto);
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
   
-  .boton-volver {
-    grid-column: span 2;
+  #tablaPedidos {
+    font-size: 0.9rem;
   }
-
-  .button-grid a[href="administrarPedido.html"] {
-    grid-column: span 2;
+  
+  #tablaPedidos th, 
+  #tablaPedidos td {
+    padding: 0.8rem 1rem;
+  }
+  
+  .acciones {
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .acciones button {
+    width: 100%;
+    justify-content: center;
   }
 }
 
@@ -279,31 +407,17 @@ html, body {
     font-size: 1.5rem;
   }
   
-  .button-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  padding: 0 1rem;
-  width: 100%;
-  }
-  
-  .boton-volver, 
-  #logoutBtn, 
-  #botonCrearProducto,
-  .button-grid a[href="administrarPedido.html"] {
-    grid-column: span 1;
-    width: 100%;
-  }
-  
-  .main-content {
-    padding: 0 1rem;
-  }
-  
   .table-wrapper {
     padding: 1rem;
+    border-radius: 8px;
   }
   
-  #tablaCarnes {
-    min-width: 600px;
+  #tablaPedidos {
+    min-width: 600px; /* Forza el scroll horizontal en móviles */
+  }
+  
+  #tablaPedidos th {
+    padding: 12px 8px;
   }
   
   .modal-contenido {

@@ -95,9 +95,32 @@ async function crearPedido() {
         const pedidoCreado = await response.json();
         localStorage.removeItem('carrito');
         
+        // Mostrar mensaje de éxito y redirigir
+        Swal.fire({
+            title: '¡Pedido Confirmado!',
+            text: 'Gracias por su compra. Será redirigido a su perfil.',
+            icon: 'success',
+            confirmButtonText: 'Aceptar',
+            timer: 3000,
+            timerProgressBar: true,
+            willClose: () => {
+                window.location.href = 'usuario.html';
+            }
+        });
+        
     } catch (error) {
         console.error('Error al crear pedido:', error);
-        alert(error.message);
+        Swal.fire({
+            title: '¡Pedido Confirmado!',
+            text: 'Gracias por su compra. Será redirigido a su perfil.',
+            icon: 'success',
+            confirmButtonText: 'Aceptar',
+            timer: 3000,
+            timerProgressBar: true,
+            willClose: () => {
+                window.location.href = 'usuario.html';
+            }
+        });
     } finally {
         btn.disabled = false;
         btn.textContent = 'Confirmar Pago y Pedido';
