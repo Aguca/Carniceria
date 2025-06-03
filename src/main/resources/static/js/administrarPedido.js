@@ -59,7 +59,7 @@ function renderizarPedidos(pedidos) {
             <td>${pedido.nombreUsuario}</td>
             <td>${fechaPedido}</td>
             <td>${fechaEntrega}</td>
-            <td>${pedido.total.toFixed(2)} €</td>
+            <td>${(pedido.total * 100).toFixed(0)} €</td>
             <td>${pedido.entregado ? 'Sí' : 'No'}</td>
             <td>${pedido.pagado ? 'Sí' : 'No'}</td>
             <td>
@@ -205,7 +205,7 @@ async function verDetalles(id) {
             </div>
             <div class="info-item">
                 <span class="info-label">Total:</span>
-                <span class="info-value">${pedido.total.toFixed(2)} €</span>
+                <span class="info-value">${(pedido.total * 100).toFixed(0)} €</span>
             </div>
             <div class="info-item">
                 <span class="info-label">Estado:</span>
@@ -232,24 +232,20 @@ async function verDetalles(id) {
                             <tr>
                                 <td>
                                     <div class="producto-info">
-                                        <img src="/img/carnes/${detalle.carneId}.jpg" 
-                                             alt="${detalle.nombreCarne}" 
-                                             class="producto-imagen"
-                                             onerror="this.src='/img/carnes/default.jpg'">
                                         <span>${detalle.nombreCarne}</span>
                                     </div>
                                 </td>
                                 <td>${detalle.tipoCorte || 'N/A'}</td>
                                 <td>${detalle.pesoEnKilos}</td>
-                                <td>${detalle.precioPorKilo} €</td>
-                                <td>${detalle.subtotal} €</td>
+                                <td>${(detalle.precioPorKilo * 100).toFixed(0)} €</td>
+                                <td>${(detalle.subtotal * 100).toFixed(0)} €</td>
                             </tr>
                         `).join('')}
                     </tbody>
                     <tfoot>
                         <tr>
                             <td colspan="4" class="total-label">Total Pedido:</td>
-                            <td class="total-value">${pedido.total.toFixed(2)} €</td>
+                            <td class="total-value">${(pedido.total * 100).toFixed(0)} €</td>
                         </tr>
                     </tfoot>
                 </table>
