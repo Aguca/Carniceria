@@ -1,0 +1,133 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.full-width-header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.full-width-header h1 {
+    margin: 0;
+    padding: 0.5rem 0;
+}
+
+.button-grid {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.button-grid button, .button-grid a {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+}
+
+.button-grid button {
+    background-color: #3498db;
+    color: white;
+}
+
+.button-grid button:hover {
+    background-color: #2980b9;
+}
+
+.boton-volver {
+    background-color: #95a5a6;
+    color: white;
+    display: inline-block;
+    text-align: center;
+    line-height: 2.2;
+}
+
+.boton-volver:hover {
+    background-color: #7f8c8d;
+}
+
+.main-content {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    margin-top: 1.5rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+tr:hover {
+    background-color: #f9f9f9;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    margin-right: 0.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+button:first-of-type {
+    background-color: #f39c12;
+    color: white;
+}
+
+button:last-of-type {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.full-width-footer {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.estado-activo {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.estado-inactivo {
+    color: #e74c3c;
+    font-weight: bold;
+}

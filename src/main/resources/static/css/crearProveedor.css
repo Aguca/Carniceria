@@ -1,0 +1,154 @@
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header */
+.full-width-header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.full-width-header h1 {
+    margin: 0;
+    padding: 0.5rem 0;
+    font-size: 1.8rem;
+}
+
+/* Botones */
+.button-grid {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.button-grid button, .button-grid a {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+#logoutBtn {
+    background-color: #e74c3c;
+    color: white;
+}
+
+#logoutBtn:hover {
+    background-color: #c0392b;
+}
+
+.boton-volver {
+    background-color: #95a5a6;
+    color: white;
+    display: inline-block;
+    text-align: center;
+    line-height: 2.2;
+}
+
+.boton-volver:hover {
+    background-color: #7f8c8d;
+}
+
+/* Contenido principal */
+.main-content {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 2rem auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Formulario */
+#formCrearProveedor {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.form-group input, 
+.form-group select {
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border 0.3s ease;
+}
+
+.form-group input:focus, 
+.form-group select:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+/* Botón de crear */
+#formCrearProveedor button[type="submit"] {
+    align-self: flex-start;
+    padding: 0.8rem 1.5rem;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#formCrearProveedor button[type="submit"]:hover {
+    background-color: #27ae60;
+}
+
+/* Estilos para select */
+.form-group select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.7rem center;
+    background-size: 1rem;
+    padding-right: 2.5rem;
+}
+
+/* Media queries para responsive */
+@media (max-width: 768px) {
+    .main-content {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+    
+    .button-grid {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .button-grid button, .button-grid a {
+        width: 100%;
+        text-align: center;
+    }
+    
+    #formCrearProveedor button[type="submit"] {
+        width: 100%;
+    }
+}

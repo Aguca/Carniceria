@@ -30,11 +30,14 @@ html, body {
     justify-content: center;
     gap: 20px;
     margin-top: 15px;
+    flex-wrap: wrap;
 }
 
 /* BOTONES */
 #logoutBtn, 
-a[href="GestorProductos.html"] {
+a[href="GestorProductos.html"],
+a[href="gestorProveedores.html"],
+a[href="administrarPedido.html"] {
     padding: 10px 20px;
     font-size: 0.9rem;
     border: none;
@@ -45,6 +48,7 @@ a[href="GestorProductos.html"] {
     text-decoration: none;
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     min-width: 180px;
+    display: inline-block;
 }
 
 #logoutBtn {
@@ -57,10 +61,23 @@ a[href="GestorProductos.html"] {
     color: white;
 }
 
+a[href="gestorProveedores.html"] {
+    background-color: #FF9800;
+    color: white;
+}
+
+a[href="administrarPedido.html"] {
+    background-color: #9C27B0;
+    color: white;
+}
+
 #logoutBtn:hover, 
-a[href="GestorProductos.html"]:hover {
+a[href="GestorProductos.html"]:hover,
+a[href="gestorProveedores.html"]:hover,
+a[href="administrarPedido.html"]:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    opacity: 0.9;
 }
 
 /* CONTENIDO PRINCIPAL */
@@ -88,7 +105,7 @@ a[href="GestorProductos.html"]:hover {
     overflow-x: auto;
     margin: 0 auto;
     padding: 20px 0;
-    background-color: #FFF8F0; /* Fondo marrón claro */
+    background-color: #FFF8F0;
     border-radius: 10px;
 }
 
@@ -96,7 +113,7 @@ a[href="GestorProductos.html"]:hover {
     width: 100%;
     max-width: 100%;
     border-collapse: collapse;
-    background-color: #FFF8F0; /* Fondo marrón claro */
+    background-color: #FFF8F0;
     box-shadow: 0 0 15px rgba(0,0,0,0.08);
     border-radius: 8px;
     overflow: hidden;
@@ -104,7 +121,7 @@ a[href="GestorProductos.html"]:hover {
 }
 
 #tablaUsuarios thead tr {
-    background-color: #4CAF50; /* Verde consistente */
+    background-color: #4CAF50;
     color: white;
 }
 
@@ -116,11 +133,11 @@ a[href="GestorProductos.html"]:hover {
 }
 
 #tablaUsuarios tbody tr:nth-child(even) {
-    background-color: #FFF8F0; /* Fondo marrón claro */
+    background-color: #FFF8F0;
 }
 
 #tablaUsuarios tbody tr:hover {
-    background-color: #F5E7DE; /* Marrón muy claro */
+    background-color: #F5E7DE;
 }
 
 /* PIE DE PÁGINA */
@@ -148,5 +165,29 @@ a[href="GestorProductos.html"]:hover {
     #tablaUsuarios th, 
     #tablaUsuarios td {
         padding: 10px 12px;
+    }
+    
+    #logoutBtn, 
+    a[href="GestorProductos.html"],
+    a[href="gestorProveedores.html"],
+    a[href="administrarPedido.html"] {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+@media (max-width: 480px) {
+    .full-width-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .main-content h2 {
+        font-size: 1.2rem;
+    }
+    
+    #tablaUsuarios th, 
+    #tablaUsuarios td {
+        padding: 8px 10px;
+        font-size: 0.9rem;
     }
 }

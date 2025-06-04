@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./css/editarProveedor.css">
+    <title>Editar Proveedor</title>
+</head>
+<body>
+    <header class="full-width-header">
+        <h1>Editar Proveedor</h1>
+        <div class="button-grid">
+            <button id="logoutBtn" onclick="cerrarSesion()">Cerrar Sesión</button>
+            <a href="gestorProveedores.html" class="boton-volver">Volver al listado</a>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <form id="formEditarProveedor">
+            <input type="hidden" id="proveedorId">
+            
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="telefono">Teléfono:</label>
+                <input type="text" id="telefono" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="activo">Estado:</label>
+                <select id="activo" required>
+                    <option value="true">Activo</option>
+                    <option value="false">Inactivo</option>
+                </select>
+            </div>
+            
+            <button type="submit">Guardar Cambios</button>
+        </form>
+    </main>
+
+    <script src="./js/editarProveedor.js"></script>
+    <script src="./js/CerrarSesion.js"></script>
+</body>
+</html>

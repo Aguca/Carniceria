@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Perfil</title>
+    <link rel="stylesheet" href="./css/editarPerfil.css">
+</head>
+<body>
+    <div class="profile-edit-container">
+        <h1>Editar Mi Perfil</h1>
+        
+        <div class="form-container">
+            <form id="formularioEditarPerfil">
+
+                <input type="hidden" id="id" name="id">
+                
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" id="apellido" name="apellido" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="dni">DNI:</label>
+                    <input type="text" id="dni" name="dni" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="tel" id="telefono" name="telefono" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="calle">Dirección:</label>
+                    <input type="text" id="calle" name="calle" required>
+                </div>
+
+                <input type="hidden" id="contrasena" name="contrasena">
+
+                <div class="button-group">
+                    <button type="submit" class="btn-save">Guardar Cambios</button>
+                    <a href="perfil.html" class="btn-cancel">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="./js/editarPerfil.js"></script>
+</body>
+</html>

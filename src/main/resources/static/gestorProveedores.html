@@ -1,37 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./css/administrador.css">
-    <title>Pagina de administración</title>
+    <link rel="stylesheet" href="./css/gestorProveedores.css">
+    <title>Gestión de Proveedores</title>
 </head>
 <body>
     <header class="full-width-header">
-        <h1>Panel de Administración</h1>
+        <h1>Panel de Gestión de Proveedores</h1>
         <div class="button-grid">
             <button id="logoutBtn" onclick="cerrarSesion()">Cerrar Sesión</button>
-            <a href="GestorProductos.html">Ir a la pagina de gestion de productos</a>
-            <a href="gestorProveedores.html">Ir a la pagina de gestion de proveedores</a>
-            <a href="administrarPedido.html">Ir a la pagina de gestion de pedidos</a>
+            <button id="botonCrearProveedor" onclick="window.location.href = 'CrearProveedor.html'">Añadir Proveedor</button>
+            <a href="administrador.html" class="boton-volver">Volver al panel</a>
         </div>
     </header>
 
     <main class="main-content">
-        <h2>Gestión de Usuarios</h2>
+        <h2>Listado de Proveedores</h2>
         
         <div class="table-wrapper">
-            <table id="tablaUsuarios">
+            <table id="tablaProveedores">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
-                        <th>Email</th>
-                        <th>Activo</th>
+                        <th>Teléfono</th>
+                        <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- La lista de usuarios será cargada dinámicamente aquí -->
+                    <!-- La lista de proveedores será cargada dinámicamente aquí -->
                 </tbody>
             </table>
         </div>
@@ -39,10 +38,11 @@
 
     <footer class="full-width-footer">
         <div class="footer-contenido">
+            <!-- Contenido del footer -->
         </div>
     </footer>
 
-    <script src="./js/admin.js"></script>
+    <script src="./js/gestionProveedores.js"></script>
     <script src="./js/CerrarSesion.js"></script>
 </body>
 </html>
