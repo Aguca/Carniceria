@@ -59,7 +59,7 @@ async function guardarCambios(event) {
         }
 
         alert('Cambios guardados correctamente');
-        window.location.href = 'gestorProductos.html';
+        window.location.href = 'GestorProductos.html';
     } catch (error) {
         console.error('Error:', error);
         alert('Error al guardar: ' + error.message);
