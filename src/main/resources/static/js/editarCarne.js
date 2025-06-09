@@ -81,9 +81,9 @@ function cancelarEdicion() {
 
     if (hayCambios) {
         if (confirm('¿Estás seguro de que deseas cancelar? Tienes cambios sin guardar que se perderán.')) {
-            window.location.href = 'gestorProductos.html';
+            window.location.href = 'GestorProductos.html';
         }
     } else {
-        window.location.href = 'gestorProductos.html';
+        window.location.href = 'GestorProductos.html';
     }
 }
