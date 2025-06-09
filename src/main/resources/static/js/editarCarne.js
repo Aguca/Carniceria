@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     } catch (error) {
         console.error('Error:', error);
         alert(error.message);
-        window.location.href = 'gestionCarnes.html';
+        window.location.href = 'GestionCarnes.html';
     }
 });
 
