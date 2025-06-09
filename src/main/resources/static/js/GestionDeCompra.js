@@ -112,16 +112,16 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .then(result => {
                 console.log('Carne guardada en sesión:', result);
-                window.location.href = 'vistaDetallecarne.html';
+                window.location.href = 'vistaDetalleCarne.html';
             })
             .catch(error => {
                 console.error('Error:', error);
                 // Aun así redirigir aunque falle el guardado en sesión
-                window.location.href = 'vistaDetallecarne.html';
+                window.location.href = 'vistaDetalleCarne.html';
             });
         } else {
             console.error('No se encontró la carne con ID:', id);
-            window.location.href = 'vistaDetallecarne.html';
+            window.location.href = 'vistaDetalleCarne.html';
         }
     }
 });
